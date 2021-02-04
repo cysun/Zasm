@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zasm", "Zasm\Zasm.csproj", "{69A8E098-AF73-406E-9677-DCF8C54660A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC38409B-97C0-4BBC-92B4-C2900FB5BCB9}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69A8E098-AF73-406E-9677-DCF8C54660A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A8E098-AF73-406E-9677-DCF8C54660A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A8E098-AF73-406E-9677-DCF8C54660A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A8E098-AF73-406E-9677-DCF8C54660A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {52366E8E-9A41-4C4C-BA65-83818B4FAD76}
+	EndGlobalSection
+EndGlobal
