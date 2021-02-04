@@ -1,7 +1,8 @@
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,17 @@ namespace Zasm
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    // Due to recent enforcement of "SameSite=None; Secure" by the major browsers
+                    // (https://blog.chromium.org/2019/10/developers-get-ready-for-new.html),
+                    // AIS must run with HTTPS even in dev environment. Use the following command
+                    // to create a trusted dev certificate:
+                    //      dotnet dev-certs https --trust
+                    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Development)
+                        webBuilder.UseStartup<Startup>();
+                    else
+                        webBuilder.UseStartup<Startup>().UseUrls("http://localhost:5009");
+                })
+                .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
+                    .ReadFrom.Configuration(hostingContext.Configuration));
     }
 }
