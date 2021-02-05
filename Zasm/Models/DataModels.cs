@@ -30,10 +30,14 @@ namespace Zasm.Models
 
         [MaxLength(32)]
         public string ParentName { get; set; }
+
         [MaxLength(255)]
         public string ParentEmail { get; set; }
 
-        public bool IsActivie { get; set; }
+        public bool IsActivie { get; set; } = true;
+
+        public List<Attendance> Attendances { get; set; }
+        public List<Payment> Payments { get; set; }
     }
 
     public class Lesson

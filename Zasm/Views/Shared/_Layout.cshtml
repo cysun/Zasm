@@ -30,17 +30,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home">Gallery</a></li>
                     @if ((await authorizationService.AuthorizeAsync(User, Policy.IsAdmin)).Succeeded)
                     {
                         <li class="nav-item"><a class="nav-link" asp-controller="Students">Students</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Lessons">Lessons</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Payments">Payments</a></li>
                     }
-                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">About Us</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Profile" asp-action="Account">Profile</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Account" asp-action="Logout">Sign Out</a>
                         </li>
@@ -64,7 +62,7 @@
     </main>
 
     <footer class="footer text-center text-muted mb-3">
-        <div>Copyright &copy; Zenia Art School.</div>
+        <div>Copyright &copy; Zenia Art School, 2021.</div>
         <div>
             Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
             <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>

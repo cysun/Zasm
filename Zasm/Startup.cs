@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -81,13 +82,18 @@ namespace Zasm
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(Policy.IsAdmin, policyBuilder => policyBuilder.RequireClaim("zasm", "true"));
+                options.AddPolicy(Policy.IsAdmin, policyBuilder => policyBuilder.RequireClaim("zasm_admin", "true"));
                 options.FallbackPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
             });
 
+            services.AddAutoMapper(config => config.AddProfile<MapperProfile>());
+
             // services.AddRouting(options => options.LowercaseUrls = true);
+
+            services.AddScoped<ClassService>();
+            services.AddScoped<StudentService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

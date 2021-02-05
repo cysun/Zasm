@@ -1,0 +1,46 @@
+@model Student
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item align-bottom"><a asp-action="Index">Students</a></li>
+        <li class="breadcrumb-item active align-bottom">@Model.Name</li>
+        <li class="ml-auto">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
+                <i class="fas fa-edit"></i>
+            </a>
+        </li>
+    </ol>
+</nav>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+    <div class="col mb-4">
+        <div class="card">
+            <div class="card-header">Basic Info</div>
+            <div class="card-body">
+                <table class="table">
+                    <tbody>
+                        <tr><th>Name</th><td>@Model.Name</td></tr>
+                        <tr><th>Age</th><td>@(DateTime.Now.Year - Model.BirthYear)</td></tr>
+                        <tr><th>Class</th><td>@Model.Class.Name</td></tr>
+                        <tr><th>Parent Name</th><td>@Model.ParentName</td></tr>
+                        <tr><th>Parent Email</th><td>@Model.ParentEmail</td></tr>
+                        <tr><th>Active</th><td>@(Model.IsActivie ? "Yes" : "No")</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-4">
+        <div class="card">
+            <div class="card-header">Lessons</div>
+        </div>
+    </div>
+    <div class="col mb-4">
+        <div class="card">
+            <div class="card-header">Payments</div>
+        </div>
+    </div>
+</div>

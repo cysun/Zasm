@@ -60,7 +60,7 @@ CREATE INDEX "IX_Payments_StudentId" ON "Payments" ("StudentId");
 CREATE INDEX "IX_Students_ClassId" ON "Students" ("ClassId");
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20210204214540_InitialSchema', '5.0.2');
+VALUES ('20210205185442_InitialSchema', '5.0.2');
 
 COMMIT;
 
