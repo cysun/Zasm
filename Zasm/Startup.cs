@@ -95,6 +95,7 @@ namespace Zasm
             services.AddScoped<ClassService>();
             services.AddScoped<StudentService>();
             services.AddScoped<LessonService>();
+            services.AddScoped<PaymentService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -18,7 +18,11 @@ namespace Zasm.Services
 
         public List<Student> GetStudents()
         {
-            return _db.Students.OrderBy(s => s.IsActivie).ToList();
+            return _db.Students
+                .Include(s => s.Class)
+                .Include(s => s.Attendances).ThenInclude(a => a.Lesson)
+                .Include(s => s.Payments)
+                .OrderBy(s => s.IsActivie).ToList();
         }
 
         public Student GetStudent(int id)

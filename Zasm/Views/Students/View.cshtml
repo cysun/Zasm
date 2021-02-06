@@ -1,4 +1,4 @@
-@model Student
+@model StudentViewModel
 @{
     ViewData["Title"] = Model.Name;
 }
@@ -36,11 +36,41 @@
     <div class="col mb-4">
         <div class="card">
             <div class="card-header">Lessons</div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    @foreach (var attendance in Model.Attendances)
+                    {
+                        <li class="list-group-item">@attendance.Lesson.DateTime.ToString("d")</li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
     <div class="col mb-4">
         <div class="card">
             <div class="card-header">Payments</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr><th>Data</th><th>Amount</th><th>Lessons</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var payment in Model.Payments)
+                        {
+                            <tr>
+                                <td>@payment.DateTime.ToString("d")</td>
+                                <td>@payment.Amount.ToString("C")</td>
+                                <td>@payment.Lessons</td>
+                            </tr>
+                        }
+                        <tr class="bg-success">
+                            <th>Total</th>
+                            <td>@Model.PaymentsTotal.ToString("C")</td>
+                            <td>@Model.LessonsTotal</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

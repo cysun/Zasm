@@ -34,8 +34,13 @@ namespace Zasm.Controllers
 
         public IActionResult Index()
         {
-            var students = _studentService.GetStudents();
-            return View(students);
+            var studentViewModels = _mapper.Map<List<StudentViewModel>>(_studentService.GetStudents());
+            foreach (var studentViewModel in studentViewModels)
+            {
+                studentViewModel.LessonsTotal = studentViewModel.Payments.Select(p => p.Lessons).Sum();
+                studentViewModel.PaymentsTotal = studentViewModel.Payments.Select(p => p.Amount).Sum();
+            }
+            return View(studentViewModels);
         }
 
         public IActionResult View(int id)
@@ -47,7 +52,11 @@ namespace Zasm.Controllers
                     Message = "This student does not exist."
                 });
 
-            return View(student);
+            var studentViewModel = _mapper.Map<StudentViewModel>(student);
+            studentViewModel.LessonsTotal = student.Payments.Select(p => p.Lessons).Sum();
+            studentViewModel.PaymentsTotal = student.Payments.Select(p => p.Amount).Sum();
+
+            return View(studentViewModel);
         }
 
         [HttpGet]
@@ -126,7 +135,7 @@ namespace Zasm.Models
         public string Name { get; set; }
 
         [Display(Name = "Birth Year")]
-        public int? BirthYear { get; set; }
+        public int BirthYear { get; set; } = DateTime.Today.Year;
 
         [Display(Name = "Class")]
         public int ClassId { get; set; }
@@ -141,5 +150,12 @@ namespace Zasm.Models
 
         [Display(Name = "Active")]
         public bool IsActivie { get; set; } = true;
+    }
+
+    public class StudentViewModel : Student
+    {
+        public int PaymentsTotal { get; set; }
+        public int LessonsTotal { get; set; }
+        public int LessonsLeft => LessonsTotal - Attendances.Count;
     }
 }

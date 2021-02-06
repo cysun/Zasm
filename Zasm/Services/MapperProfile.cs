@@ -12,11 +12,15 @@ namespace Zasm.Services
         public MapperProfile()
         {
             CreateMap<Student, StudentInputModel>();
+            CreateMap<Student, StudentViewModel>();
             CreateMap<StudentInputModel, Student>().ForMember(i => i.Id, opt => opt.Ignore());
 
             CreateMap<Lesson, LessonInputModel>();
             CreateMap<Lesson, LessonViewModel>();
             CreateMap<LessonInputModel, Lesson>().ForMember(i => i.Id, opt => opt.Ignore());
+
+            CreateMap<Payment, PaymentInputModel>();
+            CreateMap<PaymentInputModel, Payment>().ForMember(i => i.Id, opt => opt.Ignore());
         }
     }
 }

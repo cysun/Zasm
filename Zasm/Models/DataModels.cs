@@ -26,7 +26,7 @@ namespace Zasm.Models
         [MaxLength(32)]
         public string Name { get; set; }
 
-        public int? BirthYear { get; set; }
+        public int BirthYear { get; set; }
 
         public int ClassId { get; set; }
         public Class Class { get; set; }

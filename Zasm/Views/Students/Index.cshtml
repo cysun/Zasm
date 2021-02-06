@@ -1,4 +1,4 @@
-@model List<Student>
+@model List<StudentViewModel>
 @{
     ViewData["Title"] = "Students";
 }
@@ -18,7 +18,9 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>Age</th>
+            <th>Class</th>
+            <th>Lessons Taken</th>
+            <th>Lessons Left</th>
             <th></th>
         </tr>
     </thead>
@@ -27,7 +29,18 @@
         {
             <tr>
                 <td><a asp-action="View" asp-route-id="@student.Id">@student.Name</a></td>
-                <td>@(DateTime.Now.Year - student.BirthYear)</td>
+                <td>@student.Class.Name</td>
+                <td>@student.Attendances.Count</td>
+                <td>
+                    @if (student.LessonsLeft < 0)
+                    {
+                        <span class="text-danger">@student.LessonsLeft</span>
+                    }
+                    else
+                    {
+                        <span>@student.LessonsLeft</span>
+                    }
+                </td>
                 <td>
                     <a class="btn btn-primary btn-sm mr-2" asp-action="Edit" asp-route-id="@student.Id" title="Edit">
                         <i class="fas fa-edit"></i>

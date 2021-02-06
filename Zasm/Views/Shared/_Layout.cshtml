@@ -11,6 +11,7 @@
     <link id="themeCSS" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.6.0/dist/superhero/bootstrap.min.css"
           integrity="sha256-rnfdvbEFy+FHVpECE1bbe1zIsvw+ua0qkI0/Wx8tykw="
           crossorigin="anonymous">
+    @RenderSection("StyleSheets", required: false)
 </head>
 <body class="container">
     <header>
@@ -33,9 +34,9 @@
                     <li class="nav-item"><a class="nav-link" asp-controller="Home">Gallery</a></li>
                     @if ((await authorizationService.AuthorizeAsync(User, Policy.IsAdmin)).Succeeded)
                     {
-                        <li class="nav-item"><a class="nav-link" asp-controller="Students">Students</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Lessons">Lessons</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Payments">Payments</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Students" asp-action="Index">Students</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Lessons" asp-action="Index">Lessons</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Payments" asp-action="Index">Payments</a></li>
                     }
                     @if (User.Identity.IsAuthenticated)
                     {
