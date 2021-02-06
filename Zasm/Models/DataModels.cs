@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,8 @@ namespace Zasm.Models
         [Required]
         [MaxLength(32)]
         public string Name { get; set; }
+
+        public List<Student> Students { get; set; }
     }
 
     public class Student
@@ -53,6 +56,7 @@ namespace Zasm.Models
         public List<Attendance> Attendances { get; set; }
     }
 
+    [Table("Attendances")]
     public class Attendance
     {
         public int LessonId { get; set; }

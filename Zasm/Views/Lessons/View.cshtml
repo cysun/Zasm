@@ -1,0 +1,57 @@
+@model LessonViewModel
+@{
+    ViewData["Title"] = "Lesson";
+}
+
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item align-bottom"><a asp-action="Index">Lesson</a></li>
+        <li class="breadcrumb-item active align-bottom">
+            @(Model.DateTime.ToString("g")) (@Model.Class.Name)
+        </li>
+        <li class="ml-auto">
+            <button id="delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+        </li>
+    </ol>
+</nav>
+
+<div class="row">
+    @foreach (var attendance in Model.AttendanceViewModels)
+    {
+        <div class="col-md-6 offset-md-3">
+            @{ var color = attendance.Attended ? "btn-success" : "btn-secondary"; }
+            <label type="button" class="student btn @color btn-block" data-student-id="@attendance.Student.Id">
+                @attendance.Student.Name
+            </label>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $(".student").click(function () {
+                var button = $(this);
+                var lessonId = @Model.Id;
+                var studentId = $(this).attr("data-student-id");
+                var method = $(this).hasClass("btn-success") ? "delete" : "put";
+                $.ajax({
+                    url: `@Context.Request.PathBase/Lessons/${lessonId}/Students/${studentId}`,
+                    method: method,
+                    success: function () {
+                        if (method == "delete") {
+                            button.removeClass("btn-success").addClass("btn-secondary");
+                        }
+                        else
+                            button.removeClass("btn-secondary").addClass("btn-success");
+                    }
+                });
+            });
+            $("#delete").click(function () {
+                if (confirm("Are you sure you want to delete this lesson?")) {
+                    window.location.href = "@Context.Request.PathBase/Lessons/Delete/@Model.Id";
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,38 @@
+@model LessonInputModel
+@{
+    ViewData["Title"] = "New Student";
+}
+
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-action="Index">Lessons</a></li>
+        <li class="breadcrumb-item active">Add Lesson</li>
+    </ol>
+</nav>
+
+<form method="post">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="DateTime"></label>
+            <input asp-for="DateTime" class="form-control">
+            <span asp-validation-for="DateTime" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-2">
+            <label asp-for="Minutes"></label>
+            <input asp-for="Minutes" class="form-control">
+            <span asp-validation-for="Minutes" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="ClassId"></label>
+            <select asp-for="ClassId" asp-items="ViewBag.Classes" class="form-control"></select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+        </div>
+        <div class="col-8 text-right">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </div>
+</form>

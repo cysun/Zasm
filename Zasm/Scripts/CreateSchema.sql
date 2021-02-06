@@ -33,12 +33,12 @@ CREATE TABLE "Students" (
     CONSTRAINT "FK_Students_Classes_ClassId" FOREIGN KEY ("ClassId") REFERENCES "Classes" ("Id") ON DELETE CASCADE
 );
 
-CREATE TABLE "Attendance" (
+CREATE TABLE "Attendances" (
     "LessonId" integer NOT NULL,
     "StudentId" integer NOT NULL,
-    CONSTRAINT "PK_Attendance" PRIMARY KEY ("LessonId", "StudentId"),
-    CONSTRAINT "FK_Attendance_Lessons_LessonId" FOREIGN KEY ("LessonId") REFERENCES "Lessons" ("Id") ON DELETE CASCADE,
-    CONSTRAINT "FK_Attendance_Students_StudentId" FOREIGN KEY ("StudentId") REFERENCES "Students" ("Id") ON DELETE CASCADE
+    CONSTRAINT "PK_Attendances" PRIMARY KEY ("LessonId", "StudentId"),
+    CONSTRAINT "FK_Attendances_Lessons_LessonId" FOREIGN KEY ("LessonId") REFERENCES "Lessons" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Attendances_Students_StudentId" FOREIGN KEY ("StudentId") REFERENCES "Students" ("Id") ON DELETE CASCADE
 );
 
 CREATE TABLE "Payments" (
@@ -51,7 +51,7 @@ CREATE TABLE "Payments" (
     CONSTRAINT "FK_Payments_Students_StudentId" FOREIGN KEY ("StudentId") REFERENCES "Students" ("Id") ON DELETE CASCADE
 );
 
-CREATE INDEX "IX_Attendance_StudentId" ON "Attendance" ("StudentId");
+CREATE INDEX "IX_Attendances_StudentId" ON "Attendances" ("StudentId");
 
 CREATE INDEX "IX_Lessons_ClassId" ON "Lessons" ("ClassId");
 
@@ -60,7 +60,7 @@ CREATE INDEX "IX_Payments_StudentId" ON "Payments" ("StudentId");
 CREATE INDEX "IX_Students_ClassId" ON "Students" ("ClassId");
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20210205185442_InitialSchema', '5.0.2');
+VALUES ('20210205232516_InitialSchema', '5.0.2');
 
 COMMIT;
 

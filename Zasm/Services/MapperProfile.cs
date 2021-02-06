@@ -13,6 +13,10 @@ namespace Zasm.Services
         {
             CreateMap<Student, StudentInputModel>();
             CreateMap<StudentInputModel, Student>().ForMember(i => i.Id, opt => opt.Ignore());
+
+            CreateMap<Lesson, LessonInputModel>();
+            CreateMap<Lesson, LessonViewModel>();
+            CreateMap<LessonInputModel, Lesson>().ForMember(i => i.Id, opt => opt.Ignore());
         }
     }
 }
