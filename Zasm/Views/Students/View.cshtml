@@ -1,11 +1,11 @@
-@model StudentViewModel
+﻿@model StudentViewModel
 @{
     ViewData["Title"] = Model.Name;
 }
 
 <nav>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item align-bottom"><a asp-action="Index">Students</a></li>
+        <li class="breadcrumb-item align-bottom"><a asp-action="Index">@Localizer["Students"]</a></li>
         <li class="breadcrumb-item active align-bottom">@Model.Name</li>
         <li class="ml-auto">
             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
@@ -18,16 +18,19 @@
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
     <div class="col mb-4">
         <div class="card">
-            <div class="card-header">Basic Info</div>
+            <div class="card-header">@Localizer["BasicInfo"]</div>
             <div class="card-body">
                 <table class="table">
                     <tbody>
-                        <tr><th>Name</th><td>@Model.Name</td></tr>
-                        <tr><th>Age</th><td>@(DateTime.Now.Year - Model.BirthYear)</td></tr>
-                        <tr><th>Class</th><td>@Model.Class.Name</td></tr>
-                        <tr><th>Parent Name</th><td>@Model.ParentName</td></tr>
-                        <tr><th>Parent Email</th><td>@Model.ParentEmail</td></tr>
-                        <tr><th>Active</th><td>@(Model.IsActivie ? "Yes" : "No")</td></tr>
+                        <tr><th>@Localizer["Name"]</th><td>@Model.Name</td></tr>
+                        <tr><th>@Localizer["Age"]</th><td>@(DateTime.Now.Year - Model.BirthYear)</td></tr>
+                        <tr><th>@Localizer["Class"]</th><td>@Model.Class.Name</td></tr>
+                        <tr><th>@Localizer["ParentName"]</th><td>@Model.ParentName</td></tr>
+                        <tr><th>@Localizer["ParentEmail"]</th><td>@Model.ParentEmail</td></tr>
+                        <tr>
+                            <th>@Localizer["Active"]</th>
+                            <td>@(Model.IsActivie ? Localizer["Yes"] : Localizer["No"])</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -35,7 +38,7 @@
     </div>
     <div class="col mb-4">
         <div class="card">
-            <div class="card-header">Lessons</div>
+            <div class="card-header">@Localizer["Lessons"]</div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
                     @foreach (var attendance in Model.Attendances)
@@ -48,11 +51,11 @@
     </div>
     <div class="col mb-4">
         <div class="card">
-            <div class="card-header">Payments</div>
+            <div class="card-header">@Localizer["Payments"]</div>
             <div class="card-body">
                 <table class="table">
                     <thead>
-                        <tr><th>Data</th><th>Amount</th><th>Lessons</th></tr>
+                        <tr><th>@Localizer["Date"]</th><th>@Localizer["Amount"]</th><th>@Localizer["Lessonss"]</th></tr>
                     </thead>
                     <tbody>
                         @foreach(var payment in Model.Payments)
@@ -64,7 +67,7 @@
                             </tr>
                         }
                         <tr class="bg-success">
-                            <th>Total</th>
+                            <th>@Localizer["Total"]</th>
                             <td>@Model.PaymentsTotal.ToString("C")</td>
                             <td>@Model.LessonsTotal</td>
                         </tr>

@@ -85,15 +85,17 @@ namespace Zasm.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Time")]
+        [Display(Name = "Date")]
         [DataType(DataType.Date)]
         public DateTime DateTime { get; set; } = DateTime.Today;
 
         [Display(Name = "Student")]
         public int StudentId { get; set; }
 
+        [Display(Name = "Amount")]
         public int Amount { get; set; }
 
+        [Display(Name = "Lessons")]
         public int Lessons { get; set; }
     }
 }

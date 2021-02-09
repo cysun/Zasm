@@ -132,6 +132,7 @@ namespace Zasm.Models
 
         [Required]
         [MaxLength(32)]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Display(Name = "Birth Year")]

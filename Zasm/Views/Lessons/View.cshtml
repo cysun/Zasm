@@ -1,11 +1,11 @@
-@model LessonViewModel
+﻿@model LessonViewModel
 @{
-    ViewData["Title"] = "Lesson";
+    ViewData["Title"] = Localizer["Lesson"];
 }
 
 <nav>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item align-bottom"><a asp-action="Index">Lesson</a></li>
+        <li class="breadcrumb-item align-bottom"><a asp-action="Index">@Localizer["Lessons"]</a></li>
         <li class="breadcrumb-item active align-bottom">
             @(Model.DateTime.ToString("g")) (@Model.Class.Name)
         </li>

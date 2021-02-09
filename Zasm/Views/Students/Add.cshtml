@@ -1,12 +1,12 @@
-@model StudentInputModel
+﻿@model StudentInputModel
 @{
-    ViewData["Title"] = "New Student";
+    ViewData["Title"] = Localizer["NewStudent"];
 }
 
 <nav>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-action="Index">Students</a></li>
-        <li class="breadcrumb-item active">Add Student</li>
+        <li class="breadcrumb-item"><a asp-action="Index">@Localizer["Students"]</a></li>
+        <li class="breadcrumb-item active">@Localizer["AddStudent"]</li>
     </ol>
 </nav>
 
@@ -39,10 +39,10 @@
     </div>
     <div class="form-row">
         <div class="col-4">
-            <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+            <a class="btn btn-secondary" asp-action="Index">@Localizer["Cancel"]</a>
         </div>
         <div class="col-8 text-right">
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary">@Localizer["Add"]</button>
         </div>
     </div>
 </form>

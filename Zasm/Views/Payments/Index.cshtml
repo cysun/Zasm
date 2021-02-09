@@ -1,11 +1,11 @@
-@model List<Payment>
+﻿@model List<Payment>
 @{
-    ViewData["Title"] = "Payments";
+    ViewData["Title"] = Localizer["Payments"];
 }
 
 <nav>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active align-bottom">Payments</li>
+        <li class="breadcrumb-item active align-bottom">学费</li>
         <li class="ml-auto">
             <a asp-action="Add" class="btn btn-primary btn-sm">
                 <i class="fas fa-plus"></i>
@@ -17,10 +17,10 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Student</th>
-            <th>Amount</th>
-            <th class="d-none d-md-table-cell">Lessons</th>
+            <th>@Localizer["Date"]</th>
+            <th>@Localizer["Student"]</th>
+            <th>@Localizer["Amount"]</th>
+            <th class="d-none d-md-table-cell">@Localizer["Lessons"]</th>
             <th class="d-none d-md-table-cell"></th>
         </tr>
     </thead>

@@ -1,12 +1,12 @@
-@model PaymentInputModel
+﻿@model PaymentInputModel
 @{
-    ViewData["Title"] = "New Student";
+    ViewData["Title"] = Localizer["NewPayments"];
 }
 
 <nav>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-action="Index">Payments</a></li>
-        <li class="breadcrumb-item active">Add Payment</li>
+        <li class="breadcrumb-item"><a asp-action="Index">@Localizer["Payments"]</a></li>
+        <li class="breadcrumb-item active">@Localizer["AddPayment"]</li>
     </ol>
 </nav>
 
