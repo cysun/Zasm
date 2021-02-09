@@ -1,10 +1,11 @@
+﻿@inject IViewLocalizer Localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService authorizationService
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zasm - @ViewData["Title"]</title>
+    <title>@Localizer["Title"] - @ViewData["Title"]</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
           integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
           crossorigin="anonymous" />
@@ -18,7 +19,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="@Context.Request.PathBase/">
                 <img src="~/assets/paint.svg" width="30" height="30" alt="" class="d-inline-block align-top mr-2" loading="lazy">
-                Zenia Art School
+                @Localizer["Company"]
             </a>
             <button class="navbar-toggler"
                     type="button"
@@ -31,29 +32,37 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" asp-controller="Home">Gallery</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home">@Localizer["Gallery"]</a>
+                    </li>
                     @if ((await authorizationService.AuthorizeAsync(User, Policy.IsAdmin)).Succeeded)
                     {
-                        <li class="nav-item"><a class="nav-link" asp-controller="Students" asp-action="Index">Students</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Lessons" asp-action="Index">Lessons</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Payments" asp-action="Index">Payments</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Students" asp-action="Index">@Localizer["Students"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Lessons" asp-action="Index">@Localizer["Lessons"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Payments" asp-action="Index">@Localizer["Payments"]</a>
+                        </li>
                     }
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Account" asp-action="Logout">Sign Out</a>
+                            <a class="nav-link" asp-controller="Account" asp-action="Logout">@Localizer["Signout"]</a>
                         </li>
                     }
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Account" asp-action="Login">Sign In</a>
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">@Localizer["Signin"]</a>
                         </li>
                     }
                 </ul>
                 <div class="btn-group" role="group" aria-label="Choose Language">
-                    <button type="button" class="btn btn-success">English</button>
-                    <button type="button" class="btn btn-secondary">中文</button>
+                    <button id="english" type="button" class="btn btn-success">English</button>
+                    <button id="chinese" type="button" class="btn btn-secondary">中文</button>
                 </div>
             </div>
         </nav>
@@ -63,7 +72,7 @@
     </main>
 
     <footer class="footer text-center text-muted mb-3">
-        <div>Copyright &copy; Zenia Art School, 2021.</div>
+        <div>@Localizer["Copyright"] &copy; @Localizer["Company"], 2021.</div>
         <div>
             Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
             <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
@@ -75,6 +84,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
             crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script>
+        $(function () {
+            var cultureCookie = ".AspNetCore.Culture";
+            if (Cookies.get(cultureCookie)) {
+                $("#chinese").removeClass("btn-secondary").addClass("btn-success");
+                $("#english").removeClass("btn-success").addClass("btn-secondary");
+            }
+            $("#english").click(function () {
+                if (!$(this).hasClass("btn-success")) {
+                    Cookies.remove(".AspNetCore.Culture");
+                    window.location.reload();
+                }
+            });
+            $("#chinese").click(function () {
+                if (!$(this).hasClass("btn-success")) {
+                    Cookies.set(".AspNetCore.Culture", "c=zh-CN|uic=zh-CN", { expires: 365 });
+                    window.location.reload();
+                }
+            });
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
