@@ -47,7 +47,10 @@ namespace Zasm
 
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                var supportedCultures = new[] { "en-US", "zh-CN" };
+                // Technically it should be zh-CN, but the culture codes on Windows are
+                // different from the ones on Ubuntu (see https://github.com/aspnet/Mvc/issues/7307),
+                // so I have to use "zh" which is available on both platforms.
+                var supportedCultures = new[] { "en-US", "zh" };
                 options.SetDefaultCulture(supportedCultures[0])
                     .AddSupportedCultures(supportedCultures)
                     .AddSupportedUICultures(supportedCultures);
@@ -122,7 +125,7 @@ namespace Zasm
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            var supportedCultures = new[] { "en-US", "zh-CN" };
+            var supportedCultures = new[] { "en-US", "zh" };
             var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
                 .AddSupportedCultures(supportedCultures)
                 .AddSupportedUICultures(supportedCultures);

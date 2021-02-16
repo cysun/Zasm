@@ -99,7 +99,7 @@
             });
             $("#chinese").click(function () {
                 if (!$(this).hasClass("btn-success")) {
-                    Cookies.set(".AspNetCore.Culture", "c=zh-CN|uic=zh-CN", { expires: 365 });
+                    Cookies.set(".AspNetCore.Culture", "c=zh|uic=zh", { expires: 365 });
                     window.location.reload();
                 }
             });
