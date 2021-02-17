@@ -60,7 +60,7 @@
                     }
                 </ul>
                 <div class="btn-group" role="group" aria-label="Choose Language">
-                    <button id="english" type="button" class="btn btn-success">English</button>
+                    <button id="english" type="button" class="btn btn-secondary">English</button>
                     <button id="chinese" type="button" class="btn btn-secondary">中文</button>
                 </div>
             </div>
@@ -89,7 +89,9 @@
             var cultureCookie = ".AspNetCore.Culture";
             if (Cookies.get(cultureCookie)) {
                 $("#chinese").removeClass("btn-secondary").addClass("btn-success");
-                $("#english").removeClass("btn-success").addClass("btn-secondary");
+            }
+            else {
+                $("#english").removeClass("btn-secondary").addClass("btn-success");
             }
             $("#english").click(function () {
                 if (!$(this).hasClass("btn-success")) {
