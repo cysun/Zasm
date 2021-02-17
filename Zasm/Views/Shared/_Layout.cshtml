@@ -1,4 +1,10 @@
 ﻿@inject Microsoft.AspNetCore.Authorization.IAuthorizationService authorizationService
+@{ 
+    var requestCultureFeature = Context.Features.Get <Microsoft.AspNetCore.Localization.IRequestCultureFeature >();
+    var requestCulture = requestCultureFeature.RequestCulture.UICulture.IetfLanguageTag;
+    var enBtnClass = requestCulture == "en-US" ? "btn-success" : "btn-secondary";
+    var zhBtnClass = requestCulture == "zh" ? "btn-success" : "btn-secondary";
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,8 +66,8 @@
                     }
                 </ul>
                 <div class="btn-group" role="group" aria-label="Choose Language">
-                    <button id="english" type="button" class="btn btn-secondary">English</button>
-                    <button id="chinese" type="button" class="btn btn-secondary">中文</button>
+                    <button id="english" type="button" class="btn @enBtnClass">English</button>
+                    <button id="chinese" type="button" class="btn @zhBtnClass">中文</button>
                 </div>
             </div>
         </nav>
@@ -87,12 +93,6 @@
     <script>
         $(function () {
             var cultureCookie = ".AspNetCore.Culture";
-            if (Cookies.get(cultureCookie)) {
-                $("#chinese").removeClass("btn-secondary").addClass("btn-success");
-            }
-            else {
-                $("#english").removeClass("btn-secondary").addClass("btn-success");
-            }
             $("#english").click(function () {
                 if (!$(this).hasClass("btn-success")) {
                     Cookies.remove(".AspNetCore.Culture");
